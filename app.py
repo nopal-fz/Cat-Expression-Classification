@@ -29,6 +29,12 @@ def predict_image(image):
     predicted_class = np.argmax(predictions[0])
     return predicted_class, predictions[0]
 
+# Validasi input gambar
+def is_valid_image(image, threshold=0.5):
+    _, prediction_proba = predict_image(image)
+    confidence = max(prediction_proba)
+    return confidence >= threshold
+
 content = '''
     <div style="text-align: center;">
         <h1>Cat Expression Recognition 😺😿😼</h1>
@@ -47,18 +53,20 @@ if uploaded_file is not None:
     resized_img = img.resize((400, 400))
     st.image(img, caption='Uploaded Image', use_column_width=True)
 
-    # Prediksi
-    predicted_class, prediction_proba = predict_image(img)
-    
-    # Menampilkan hasil prediksi
-    class_labels = ['Angry', 'Sad', 'Happy']
-    predicted_label = class_labels[predicted_class]
-    
-    st.write(f"Prediction: {predicted_label}")
-    st.write(f"Prediction Probabilities: {prediction_proba}")
-
-    # Menampilkan grafik distribusi prediksi
-    fig, ax = plt.subplots()
-    ax.bar(class_labels, prediction_proba)
-    st.pyplot(fig)
-
+    if is_valid_image(img):
+        predicted_class, prediction_proba = predict_image(img)
+        class_labels = ['Angry', 'Sad', 'Happy']
+        predicted_label = class_labels[predicted_class]
+        
+        st.write(f"Prediction: {predicted_label}")
+        st.write(f"Prediction Probabilities: {prediction_proba}")
+        
+        # Visualisasi distribusi probabilitas
+        fig, ax = plt.subplots()
+        ax.bar(class_labels, prediction_proba, color=['red', 'blue', 'green'])
+        ax.set_ylim([0, 1])
+        ax.set_ylabel('Probability')
+        ax.set_title('Prediction Probabilities')
+        st.pyplot(fig)
+    else:
+        st.error("Invalid image: Please upload an image of a cat.")
