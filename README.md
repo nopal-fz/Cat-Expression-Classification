@@ -1,6 +1,6 @@
 # Cat Expression Classifier
 
-This repository contains the implementation and deployment of a machine learning model that classifies cat expressions into multiple categories. The model leverages a pre-trained MobileNetV2 architecture with fine-tuning for enhanced accuracy and is deployed using Streamlit for a user-friendly web interface.
+This repository contains the implementation and deployment of a machine learning model that classifies cat expressions into multiple categories. The model leverages a pre-trained MobileNetV2 architecture with fine-tuning for enhanced accuracy and is deployed using Streamlit for a user-friendly web interface. for the .ipynb file there is a deep-learning-projects repository
 
 ---
 
