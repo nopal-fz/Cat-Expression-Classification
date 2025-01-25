@@ -103,3 +103,6 @@ This project is licensed under the MIT License. See the LICENSE file for details
 ---
 
 Enjoy classifying cat expressions!
+
+You can try it self by this link:
+https://cat-expression-classification.streamlit.app/
